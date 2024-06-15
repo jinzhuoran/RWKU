@@ -1,10 +1,5 @@
 import json
 import os
-
-os.environ["http_proxy"] = "http://hongbang:hahaha@210.75.240.137:10802/"
-os.environ["https_proxy"] = "http://hongbang:hahaha@210.75.240.137:10802/"
-os.environ["all_proxy"] = "http://hongbang:hahaha@210.75.240.137:10802/"
-
 from datasets import load_dataset
 
 forget_target = load_dataset("jinzhuoran/RWKU", 'forget_target')['train']
