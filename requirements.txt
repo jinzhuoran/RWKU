@@ -1,0 +1,12 @@
+torch>=1.13.1
+transformers>=4.37.2
+datasets>=2.14.3
+accelerate>=0.27.2
+peft>=0.10.0
+trl>=0.8.1
+scipy==1.11.4
+einops==0.7.0
+sentencepiece==0.2.0
+protobuf==4.25.3
+rouge
+nltk==3.8.1
