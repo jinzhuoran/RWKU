@@ -58,6 +58,14 @@ cd LLaMA-Factory/data
 bash download.sh
 ```
 
+
+### Evaluation Framework
+
+RWKU mainly consists of four subsets, including forget set, neighbor set, MIA set and utility set.
+![Evaluation Framework.](file/framework.png)
+
+
+
 ### Supported Unlearning Methods
 - **In-Context Unlearning (ICU)**: We use specific instructions to make the model behave as if it has forgotten the target knowledge, without actually modifying the model parameters.
 - **Gradient Ascent (GA)**: In contrast to the gradient descent during the pre-training phase, we maximize the negative log-likelihood loss on the forget corpus. This approach aims to steer the model away from its initial predictions, facilitating the process of unlearning. 
