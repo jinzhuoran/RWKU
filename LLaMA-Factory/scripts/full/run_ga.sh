@@ -1,4 +1,5 @@
 #!/bin/bash
+
 names=('1_Stephen_King' '2_Confucius' '3_Bruce_Lee' '4_Warren_Buffett' '5_Christina_Aguilera'
 '6_Cindy_Crawford' '7_Marie_Osmond' '8_Paris_Hilton' '9_Justin_Bieber' '10_Prince_Harry,_Duke_of_Sussex'
 '11_Miley_Cyrus' '12_Genghis_Khan' '13_Liza_Minnelli' '14_Taylor_Swift' '15_Mark_Cuban'
@@ -27,7 +28,7 @@ do
     echo $id
 
     PYTHONPATH=./ WANDB_DISABLED=true python src/train_bash.py --stage ga \
-    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct --do_train \
+    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct --do_train --save_model \
     --dataset ${id}_Positive --dataset_dir ./data --finetuning_type full \
     --output_dir ./saves/RWKU/Target/${id}/ga_full/llama3_8b_instruct --overwrite_cache \
     --overwrite_output_dir --cutoff_len 512 --preprocessing_num_workers 16 \

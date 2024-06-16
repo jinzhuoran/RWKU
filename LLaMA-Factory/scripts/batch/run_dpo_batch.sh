@@ -9,7 +9,7 @@ do
     echo $id
 
     PYTHONPATH=./ WANDB_DISABLED=true python src/train_bash.py --stage dpo \
-    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct --do_train \
+    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct --do_train --save_model \
     --dataset ${id}_Pair --dataset_dir ./data --finetuning_type full \
     --output_dir ./saves/RWKU/Batch/${id}/dpo_full/llama3_8b_instruct --overwrite_cache \
     --overwrite_output_dir --cutoff_len 512 --preprocessing_num_workers 16 \

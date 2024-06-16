@@ -20,23 +20,22 @@ names=('1_Stephen_King' '2_Confucius' '3_Bruce_Lee' '4_Warren_Buffett' '5_Christ
 '91_Halle_Berry' '92_Larry_Bird' '93_Johnny_Cash' '94_Chevy_Chase' '95_Bill_Paxton'
 '96_Ice_Cube' '97_Don_Johnson' '98_Dwayne_Johnson' '99_RuPaul' '100_Matthew_Perry')
 
-
 for name in "${names[@]}"
 do
-    mkdir -p ./logs/RWKU/Target/dpo_full
+    mkdir -p ./logs/RWKU/Target/rt_full
     id=$name
     echo $id
 
-    PYTHONPATH=./ WANDB_DISABLED=true python src/train_bash.py --stage dpo \
-    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct --do_train \
-    --dataset ${id}_Pair --dataset_dir ./data --finetuning_type full \
-    --output_dir ./saves/RWKU/Target/${id}/dpo_full/llama3_8b_instruct --overwrite_cache \
+    PYTHONPATH=./ WANDB_DISABLED=true python src/train_bash.py --stage rt \
+    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct --do_train --save_model \
+    --dataset ${id}_Reject --dataset_dir ./data --finetuning_type full \
+    --output_dir ./saves/RWKU/Target/${id}/rt_full/llama3_8b_instruct --overwrite_cache \
     --overwrite_output_dir --cutoff_len 512 --preprocessing_num_workers 16 \
-    --per_device_train_batch_size 2 --per_device_eval_batch_size 2 --gradient_accumulation_steps 4 \
+    --per_device_train_batch_size 8 --per_device_eval_batch_size 8 --gradient_accumulation_steps 1 \
     --lr_scheduler_type cosine --logging_steps 10 --warmup_steps 20 --save_steps 30000 \
     --eval_steps 30000 --evaluation_strategy steps --load_best_model_at_end --template llama3 \
-    --learning_rate 5e-6 --num_train_epochs 3.0 --val_size 0.0000001 --dpo_ftx 0.0 --plot_loss \
-    --output_result_dir ./results/RWKU/Target/${id}/dpo_full/llama3_8b_instruct \
+    --learning_rate 4e-7 --num_train_epochs 3.0 --val_size 0.0000001 --plot_loss \
+    --output_result_dir ./results/RWKU/Target/${id}/rt_full/llama3_8b_instruct \
     --fp16 --eval_dataset_dir ./data/RWKU/Target/ \
-    --target ${id} 2>&1 | tee ./logs/RWKU/Target/dpo_full/llama3_8b_instruct_${id}.log
+    --target ${id} 2>&1 | tee ./logs/RWKU/Target/rt_full/llama3_8b_instruct_${id}.log
 done

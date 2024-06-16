@@ -286,7 +286,7 @@ def get_train_args(args: Optional[Dict[str, Any]] = None) -> _TRAIN_CLS:
 
     # Log on each process the small summary:
     logger.info(
-        "Process rank: {}, device: {}, n_gpu: {}, distributed training: {}, compute dtype: {}".format(
+        "process rank: {}, device: {}, n_gpu: {}, distributed training: {}, compute dtype: {}".format(
             training_args.local_rank,
             training_args.device,
             training_args.n_gpu,
