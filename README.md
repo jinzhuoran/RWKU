@@ -19,7 +19,7 @@ RWKU is a real-world knowledge unlearning benchmark specifically designed for la
 - For the **task setting**, we consider a more practical and challenging setting, similar to zero-shot knowledge unlearning. We provide only the unlearning target and the original model, without offering any forget corpus or retain corpus. In this way, it avoids secondary information leakage caused by the forget corpus and is not affected by the distribution bias of the retain corpus.
 - For the **knowledge source**, we choose real-world famous people from Wikipedia as the unlearning targets and demonstrate that such popular knowledge is widely present in various LLMs through memorization quantification, making it more suitable for knowledge unlearning. Additionally, choosing entities as unlearning targets can well clearly define the unlearning boundaries.
 - For the **evaluation framework**, we carefully design the **forget set** and the **retain set** to evaluate the model's capabilities from multiple real-world applications.
-  - Regarding the **forget set**, we evaluate the **efficacy** of knowledge unlearning at both the **knowledge memorization** (fill-in-the-blank style) and **knowledge manipulation** (question-answer style) abilities. Specifically, we also evaluate these two abilities through adversarial attacks to induce forgotten knowledge in the model. We adopt four membership inference attack (MIA) methods for knowledge memorization on our collected MIA set. We meticulously designed nine types of adversarial-attack probes for knowledge manipulation, including _prefix injection, affirmative suffix, role playing, reverse query, and others_.
+  - Regarding the **forget set**, we evaluate the **efficacy** of knowledge unlearning at both the **knowledge memorization** (fill-in-the-blank style) and **knowledge manipulation** (question-answer style) abilities. Specifically, we also evaluate these two abilities through **adversarial attacks** to induce forgotten knowledge in the model. We adopt four **membership inference attack** (MIA) methods for knowledge memorization on our collected MIA set. We meticulously designed nine types of adversarial-attack probes for knowledge manipulation, including _prefix injection, affirmative suffix, role playing, reverse query, and others_.
   - Regarding the **retain set**, we design a neighbor set to test the impact of _neighbor perturbation_, specifically focusing on the **locality** of unlearning. In addition, we assess the **model utility** on various downstream capabilities, including _general ability, reasoning ability, truthfulness, factuality, and fluency_.
 
 
@@ -42,15 +42,7 @@ One way is to load the dataset from [Huggingface](https://huggingface.co/dataset
 cd process
 python data_process.py
 ```
-```python
-from datasets import load_dataset
-forget_target = load_dataset("jinzhuoran/RWKU", 'forget_target')['train'] # 200 unlearning targets
-forget_level1 = load_dataset("jinzhuoran/RWKU", 'forget_level1')['test'] # forget knowledge memorization probes
-forget_level2 = load_dataset("jinzhuoran/RWKU", 'forget_level2')['test'] # forget knowledge manipulation probes
-forget_level3 = load_dataset("jinzhuoran/RWKU", 'forget_level3')['test'] # forget adversarial attack probes
-neighbor_level1 = load_dataset("jinzhuoran/RWKU", 'neighbor_level1')['test'] # neighbor knowledge memorization probes
-neighbor_level2 = load_dataset("jinzhuoran/RWKU", 'neighbor_level2')['test'] # neighbor knowledge manipulation probes
-```
+
 
 Another way is to download the processed dataset directly from [Google Drive](https://drive.google.com/file/d/1ukWg-T3GPvqpyW7058vNyRWdXuQHRJPb/view?usp=sharing).
 ```bash
@@ -58,11 +50,56 @@ cd LLaMA-Factory/data
 bash download.sh
 ```
 
+### Unlearning Target
+
+RWKU includes 200 famous people from [The Most Famous All-time People Rank](https://today.yougov.com/ratings/international/fame/all-time-people/all), such as Stephen King, Warren Buffett, Taylor Swift, etc.
+We demonstrate that such popular knowledge is widely present in various LLMs through memorization quantification, making it more suitable for unlearning.
+```python
+from datasets import load_dataset
+forget_target = load_dataset("jinzhuoran/RWKU", 'forget_target')['train'] # 200 unlearning targets
+```
+
 
 ### Evaluation Framework
 
 RWKU mainly consists of four subsets, including forget set, neighbor set, MIA set and utility set.
 ![Evaluation Framework.](file/framework.png)
+
+#### Forget Set
+
+```python
+from datasets import load_dataset
+forget_level1 = load_dataset("jinzhuoran/RWKU", 'forget_level1')['test'] # forget knowledge memorization probes
+forget_level2 = load_dataset("jinzhuoran/RWKU", 'forget_level2')['test'] # forget knowledge manipulation probes
+forget_level3 = load_dataset("jinzhuoran/RWKU", 'forget_level3')['test'] # forget adversarial attack probes
+```
+
+#### Neighbor Set
+
+```python
+from datasets import load_dataset
+neighbor_level1 = load_dataset("jinzhuoran/RWKU", 'neighbor_level1')['test'] # neighbor knowledge memorization probes
+neighbor_level2 = load_dataset("jinzhuoran/RWKU", 'neighbor_level2')['test'] # neighbor knowledge manipulation probes
+```
+
+#### MIA Set
+
+```python
+from datasets import load_dataset
+mia_forget = load_dataset("jinzhuoran/RWKU", 'mia_forget') # forget member set
+mia_retain = load_dataset("jinzhuoran/RWKU", 'mia_retain') # retain member set
+```
+
+#### Utility Set
+
+```python
+from datasets import load_dataset
+utility_general = load_dataset("jinzhuoran/RWKU", 'utility_general') # general ability
+utility_reason = load_dataset("jinzhuoran/RWKU", 'utility_reason') # reasoning ability
+utility_truthfulness = load_dataset("jinzhuoran/RWKU", 'utility_truthfulness') # truthfulness
+utility_factuality = load_dataset("jinzhuoran/RWKU", 'utility_factuality') # factuality
+utility_fluency = load_dataset("jinzhuoran/RWKU", 'utility_fluency') # fluency
+```
 
 
 
@@ -188,7 +225,8 @@ Results of main experiment on Phi-3 Mini-4K-Instruct (3.8B).
 ![Results of main experiment on Phi-3 Mini-4K-Instruct (3.8B).](file/result_phi.jpg)
 
 
-## Citation
+
+### Citation
 
 If you find our codebase and dataset beneficial, please cite our work:
 
@@ -201,3 +239,11 @@ If you find our codebase and dataset beneficial, please cite our work:
       primaryClass={cs.CL}
 }
 ```
+
+### Other Related Projects
+
+- [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)
+- [MIMIR](https://github.com/iamgroot42/mimir)
+- [TOFU](https://github.com/locuslab/tofu)
+- [repeng](https://github.com/vgel/repeng)
+
