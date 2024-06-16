@@ -19,8 +19,8 @@ RWKU is a real-world knowledge unlearning benchmark specifically designed for la
 - For the **task setting**, we consider a more practical and challenging setting, similar to zero-shot knowledge unlearning. We provide only the unlearning target and the original model, without offering any forget corpus or retain corpus. In this way, it avoids secondary information leakage caused by the forget corpus and is not affected by the distribution bias of the retain corpus.
 - For the **knowledge source**, we choose real-world famous people from Wikipedia as the unlearning targets and demonstrate that such popular knowledge is widely present in various LLMs through memorization quantification, making it more suitable for knowledge unlearning. Additionally, choosing entities as unlearning targets can well clearly define the unlearning boundaries.
 - For the **evaluation framework**, we carefully design the **forget set** and the **retain set** to evaluate the model's capabilities from multiple real-world applications.
-  - Regarding the **forget set**, we evaluate the **efficacy** of knowledge unlearning at both the **knowledge memorization** (fill-in-the-blank style) and **knowledge manipulation** (question-answer style) abilities. Specifically, we also evaluate these two abilities through adversarial attacks to induce forgotten knowledge in the model. We adopt four membership inference attack (MIA) methods for knowledge memorization on our collected MIA set. We meticulously designed nine types of adversarial-attack probes for knowledge manipulation, including `prefix injection, affirmative suffix, role playing, reverse query, and others`.
-  - Regarding the **retain set**, we design a neighbor set to test the impact of `neighbor perturbation`, specifically focusing on the **locality** of unlearning. In addition, we assess the **model utility** on various downstream capabilities, including `general ability, reasoning ability, truthfulness, factuality, and fluency`.
+  - Regarding the **forget set**, we evaluate the **efficacy** of knowledge unlearning at both the **knowledge memorization** (fill-in-the-blank style) and **knowledge manipulation** (question-answer style) abilities. Specifically, we also evaluate these two abilities through adversarial attacks to induce forgotten knowledge in the model. We adopt four membership inference attack (MIA) methods for knowledge memorization on our collected MIA set. We meticulously designed nine types of adversarial-attack probes for knowledge manipulation, including _prefix injection, affirmative suffix, role playing, reverse query, and others_.
+  - Regarding the **retain set**, we design a neighbor set to test the impact of _neighbor perturbation_, specifically focusing on the **locality** of unlearning. In addition, we assess the **model utility** on various downstream capabilities, including _general ability, reasoning ability, truthfulness, factuality, and fluency_.
 
 
 
@@ -161,13 +161,13 @@ bash scripts/batch/run_rt.sh
 ```
 
 
-#### LoRA Setting
+#### LoRA Unlearning Setting
 
-Set `--finetuning_type lora` and `--lora_target q_proj,v_proj`.
+Please set `--finetuning_type lora` and `--lora_target q_proj,v_proj`.
 
-#### Partial-layer Setting
+#### Partial-layer Unlearning Setting
 
-Set `--train_layers 0-4`.
+Please set `--train_layers 0-4`.
 
 
 
