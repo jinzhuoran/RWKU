@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://rwku-bench.github.io/"> 🏠 Homepage</a> |
-  <a href=""> 📜 Paper</a> | 
+  <a href="https://arxiv.org/abs/2406.10890"> 📜 Paper</a> | 
   <a href="https://huggingface.co/datasets/jinzhuoran/RWKU"> 🤗 Dataset</a> | 
   <a href="#Installation"> 🚀 Installation</a> 
 </p>
@@ -232,11 +232,12 @@ If you find our codebase and dataset beneficial, please cite our work:
 
 ```bibtex
 @misc{jin2024rwku,
-      title={RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models}, 
-      author={Zhuoran Jin and Pengfei Cao and Chenhao Wang and Zhitao He and Hongbang Yuan and Jiachun Li and Yubo Chen and Kang Liu and Jun Zhao},
-      year={2024},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+    title={RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models},
+    author={Zhuoran Jin and Pengfei Cao and Chenhao Wang and Zhitao He and Hongbang Yuan and Jiachun Li and Yubo Chen and Kang Liu and Jun Zhao},
+    year={2024},
+    eprint={2406.10890},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
 }
 ```
 
