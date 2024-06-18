@@ -9,8 +9,9 @@
 </p>
 
 ### News
+- 2024-06-18: We released our paper titled "[RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models](https://arxiv.org/abs/2406.10890)".
 
-- 2024-06-05: We have released our dataset on the [Huggingface](https://huggingface.co/datasets/jinzhuoran/RWKU).
+- 2024-06-05: We released our dataset on the [Huggingface](https://huggingface.co/datasets/jinzhuoran/RWKU).
 
 ### Description
 
