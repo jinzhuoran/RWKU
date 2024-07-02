@@ -11,6 +11,9 @@ forget_level3 = load_dataset("jinzhuoran/RWKU", 'forget_level3')['test']
 neighbor_level1 = load_dataset("jinzhuoran/RWKU", 'neighbor_level1')['test']
 neighbor_level2 = load_dataset("jinzhuoran/RWKU", 'neighbor_level2')['test']
 
+mia_forget = load_dataset("jinzhuoran/RWKU", 'mia_forget')["test"] # forget member set
+mia_retain = load_dataset("jinzhuoran/RWKU", 'mia_retain')["test"] # retain member set
+
 utility_general = load_dataset("jinzhuoran/RWKU", 'utility_general')['test']
 utility_reason = load_dataset("jinzhuoran/RWKU", 'utility_reason')['test']
 utility_truthfulness = load_dataset("jinzhuoran/RWKU", 'utility_truthfulness')['test']
@@ -131,5 +134,15 @@ for target in forget_target['target']:
 
     dataset = train_refusal_phi3.filter(lambda example: example["subject"] == target).to_list()
     with open(os.path.join(os.path.join(output_dir, str(cnt) + '_' + target.replace(' ', '_')), 'reject_phi.json'),
+              'w') as f:
+        json.dump(dataset, f, indent=4)
+
+    dataset = mia_forget.filter(lambda example: example["subject"] == target).to_list()
+    with open(os.path.join(os.path.join(output_dir, str(cnt) + '_' + target.replace(' ', '_')), 'forget_mia.json'),
+              'w') as f:
+        json.dump(dataset, f, indent=4)
+
+    dataset = mia_retain.filter(lambda example: example["subject"] == target).to_list()
+    with open(os.path.join(os.path.join(output_dir, str(cnt) + '_' + target.replace(' ', '_')), 'retain_mia.json'),
               'w') as f:
         json.dump(dataset, f, indent=4)
