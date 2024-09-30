@@ -9,6 +9,8 @@
 </p>
 
 ### News
+- 2024-09-26: 🚀🚀 Our paper has been accepted at NeurIPS D&B Track 2024.
+
 - 2024-06-18: We released our [paper](https://arxiv.org/abs/2406.10890) titled "RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models".
 
 - 2024-06-05: We released our [dataset](https://huggingface.co/datasets/jinzhuoran/RWKU) on the Huggingface.
